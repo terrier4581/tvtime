@@ -6,12 +6,15 @@ var express = require('express')
 var app = express();
 var upload = multer({ dest: '/tmp/' });
 
+var key = 'UOqGcWIrzuvuF6ijgFYea'
+var appletvid = 'E91362E9-AC66-4F93-A171-0DAAFFEC9A90'
+
 app.post('/', upload.single('thumb'), function (req, res, next) {
   var payload = JSON.parse(req.body.payload);
   //console.log('Got webhook for', payload.event);
 
 // Apple TV.
-  if (payload.Player.uuid == process.env.E91362E9-AC66-4F93-A171-0DAAFFEC9A90 && payload.Metadata.type != 'track') {
+  if (payload.Player.uuid == appletvid && payload.Metadata.type != 'track') {
    var options = {
     method: 'PUT',
     json: true,
